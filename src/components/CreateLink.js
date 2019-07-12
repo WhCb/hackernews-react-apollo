@@ -34,16 +34,12 @@ class CreateLink extends Component {
    * 
    */
   handleSubmit() {
-    const { history } = this.props
+    const { client, history } = this.props
     const { description, url } = this.state
 
-    this.props.client.mutate({ mutation: POST_MUTATION, variables: { description, url } })
-      .then(response => {
-        console.log('res: ', response)
-        history.push('/')
-      })
+    client.mutate({ mutation: POST_MUTATION, variables: { description, url } })
+      .then(response => { history.push('/') })
       .catch(err => { console.log('err: ', err) })
-    
   }
 
   render () {

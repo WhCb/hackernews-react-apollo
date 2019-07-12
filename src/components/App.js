@@ -5,6 +5,7 @@ import '../styles/App.css';
 import Header from './Header'
 import LinkList from './LinkList'
 import CreateLink from './CreateLink'
+import Login from './Login'
 
 // Routing Components
 import { Switch, Route } from 'react-router-dom'
@@ -18,6 +19,7 @@ function App(props) {
         <Switch>
           <Route exact path='/' component={() => <LinkList client={props.client} />} />
           <Route exact path='/create' component={() => <CreateLink client={props.client} />} />
+          <Route exact path='/login' component={() => <Login client={props.client} />} />
         </Switch>
       </div>
     </div>
