@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+// Routing Components
+import { withRouter } from 'react-router'
+
 // Utilities
 import gql from 'graphql-tag'
 
@@ -30,17 +33,17 @@ class CreateLink extends Component {
   /**
    * 
    */
-  async handleSubmit() {
+  handleSubmit() {
+    const { history } = this.props
     const { description, url } = this.state
 
-    let response = await this.props.client.mutate({ 
-      mutation: POST_MUTATION,
-      variables: {
-        description,
-        url
-      }
-     })
-    console.log('res: ', response)
+    this.props.client.mutate({ mutation: POST_MUTATION, variables: { description, url } })
+      .then(response => {
+        console.log('res: ', response)
+        history.push('/')
+      })
+      .catch(err => { console.log('err: ', err) })
+    
   }
 
   render () {
@@ -71,4 +74,4 @@ class CreateLink extends Component {
   }
 }
 
-export default CreateLink
+export default withRouter(CreateLink)
